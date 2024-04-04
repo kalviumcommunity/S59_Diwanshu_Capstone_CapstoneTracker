@@ -36,6 +36,27 @@ The CapstoneConnect Web App is a platform designed to facilitate regular connect
 ---
 
 
+# **Daily Tasks**
+
+---
+
+ **Initialize a Git repository and project setup.**
+
+ **Create a low-fidelity design to outline the basic UI concept.**
+
+ **Develop a high-fidelity wireframe to depict the final UI appearance.**
+
+ **Set up a foundational backend server for the project.**
+
+ **Implement GET endpoints to retrieve or fetch data.**
+
+ **Integrate POST endpoints to enable users to report incidents.**
+
+ **Incorporate PUT endpoints for updating incident status, indicating resolution status.**
+
+ **Deploy the backend server and initialize a rudimentary frontend application.**
+
+---
 
 
  
