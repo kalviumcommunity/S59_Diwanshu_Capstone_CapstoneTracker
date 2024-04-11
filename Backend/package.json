@@ -1,5 +1,5 @@
 {
-  "name": "s59_diwanshu_capstone_capstonetracker",
+  "name": "server",
   "version": "1.0.0",
   "description": "*Plan Discuss Execute*",
   "main": "index.js",
@@ -10,9 +10,13 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "argon2": "^0.40.1",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
-    "mongoose": "^8.3.1"
+    "joi": "^17.12.3",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.3.1",
+    "nodemon": "^3.1.0"
   }
 }
