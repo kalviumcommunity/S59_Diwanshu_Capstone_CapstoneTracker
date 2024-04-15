@@ -2,8 +2,12 @@ require("dotenv").config();
 
 const express = require("express");
 const router = express.Router()
+<<<<<<< HEAD
 const {UserModel} = require("../Model/userSchema");
 const passport = require("passport");
+=======
+
+>>>>>>> main
 const jwt = require("jsonwebtoken");
 const {updateSchema,userJoiSchema} = require("../validation/userJoiSchemas");
 const {validateData} = require("../validation/validator");
@@ -39,11 +43,16 @@ router.post("/register" , async (req,res) => {
        const savedUser = await newUser.save();
        res.status.apply(201).json(savedUser);
     } catch(error) {
+<<<<<<< HEAD
         console.error("Error registering user :" , error) ;
+=======
+        console.error("Error registering user :" error) ;
+>>>>>>> main
         res.status(500).json({message : "Internal Server Error"});
    }
 });
 
+<<<<<<< HEAD
 router.post("/login", passport.authenticate("local", {session:false}),
 (req,res) => {
     const token=jwt.sign({userId : req.user._id},process.env.SECRET_KEY,{
@@ -90,3 +99,10 @@ router.put(
 );
 
 module.exports = router ;
+=======
+// router.post("/login", 
+// (req,res) => {
+
+// },
+// );
+>>>>>>> main
