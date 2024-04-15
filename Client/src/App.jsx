@@ -1,14 +1,14 @@
 
 
 import './App.css'
-import Loader  from './components/Loader'
-
+// import Loader  from './components/Loader'
+import LandingPage from './components/landingPage'
 function App() {
 
 
   return (
     <>
-       <Loader/>
+       <LandingPage/>
     </>
   )
 }
