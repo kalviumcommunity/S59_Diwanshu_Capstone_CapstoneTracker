@@ -1,5 +1,6 @@
 import logo from "../assets/logo.png"
 import landingImage from "../assets/landing_page_Image.png" 
+import { Link } from "react-router-dom";
 
 function LandingPage (){
     return (
@@ -24,9 +25,12 @@ function LandingPage (){
             {" "}
             Plan , Discuss, Execute
           </p>
-          <button className="w-48 text-2xl mx-24 mt-8 bg-indigo-800 text-white rounded-xl border-red-400">
-            Get Started
-          </button>
+          <Link to={"/signup"}>
+            <button className="w-48 text-2xl mx-24 mt-8 bg-indigo-800 text-white rounded-xl border-red-400">
+             Get Started
+            {/* <h1 className="bg-purple-400">Hello</h1> */}
+            </button>
+          </Link>
         </div>
         <div className="w-1/2 h-screen bg-purple-400 ">
           <div className="text-transform: uppercase text-xl text-white flex flex-row justify-around my-16">
