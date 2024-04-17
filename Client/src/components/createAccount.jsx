@@ -1,27 +1,31 @@
+
 import logo from "../assets/logo.png";
 import { useForm } from "react-hook-form";
+import {Link} from "react-router-dom" ;
 import landingImage from "../assets/landing_page_Image.png";
-// import { Checkbox } from "@/components/ui/checkbox";
+import googleImage from "../assets/googleImage.png";
+
 
 
 function CreateAccount() {
-
-     const {
+  const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
-  const onSubmit=(data)=>{
+  const onSubmit = (data) => {
     console.log(data);
-  }
+  };
 
   return (
     <div className="w-screen h-screen flex flex-row">
       <div className="w-1/2 h-screen bg-white">
-        <img src={logo} alt="logo" className="h-99 w-99 md:w-36 mb-12" />
+        <Link to="/">
+          <img src={logo} alt="logo" className="h-99 w-99 md:w-36 mb-12" />
+        </Link>
         <div className="flex place flex-col place-items-center">
-          <h1 className="text-purple-400 text-4xl">Create an Account </h1>
+          <h1 className="text-purple-400 text-4xl">Create an account </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div>
               <strong className="text-indigo-300 text-2xl">Email</strong> <br />
@@ -34,7 +38,9 @@ function CreateAccount() {
                   pattern: { value: /^\S+@\S+$/i, message: "Invalid email" },
                 })}
               />
-              {errors.email && <p>Email is Required.</p>}
+              {errors.email && (
+                <p className="text-red-600">Email is Required.</p>
+              )}
             </div>
             <div>
               <strong className="text-indigo-300 text-2xl">password</strong>
@@ -51,7 +57,9 @@ function CreateAccount() {
                   },
                 })}
               />
-              {errors.password && <p>{errors.password.message}</p>}
+              {errors.password && (
+                <p className="text-red-600 ">{errors.password.message}</p>
+              )}
             </div>
             <div>
               <label>
@@ -59,6 +67,7 @@ function CreateAccount() {
                   type="checkbox"
                   {...register("checkboxName", {
                     required: "Please fill it.",
+                    message: "Please fill it.",
                   })}
                 />
                 I agree to the{" "}
@@ -68,6 +77,9 @@ function CreateAccount() {
                 and
                 <span className="underline text-blue-500">Privacy Policy.</span>
               </label>
+              {errors.checkboxName && (
+                <p className="text-red-600"> {errors.checkboxName.message}</p>
+              )}
             </div>
             <button
               type="submit"
@@ -76,21 +88,43 @@ function CreateAccount() {
               Sign up
             </button>
           </form>
-          <div className="flex flex-row my-3">
-            <div className="h-0.5 bg-gray-300"></div>
-            <p className="text-transform: uppercase  text-2xl">
+          <div className="flex flex-row my-3 items-center">
+            <div className="h-[1px] w-8 bg-gray-300"></div>
+            <p className="text-transform: uppercase text-gray-300 m-3 text-sm">
               or Continue with
             </p>
-            <div className="h-0.5 bg-gray-300"></div>
+            <div className="h-[1px] w-8 bg-gray-300"></div>
+          </div>
+          <div>
+            <button
+              type="submit"
+              className="h-11 w-96   rounded-xl border-indigo-700 border-2 border-solid text-center flex place-items-center "
+            >
+              <div className="flex place-items-center mx-16">
+                <img
+                  src={googleImage}
+                  alt="googleImage"
+                  className="h-4 w-8 mx-3 "
+                />
+                Signup with Google
+              </div>
+            </button>
           </div>
         </div>
       </div>
 
       <div className="w-1/2 h-screen bg-purple-400 ">
         <div className="text-transform: uppercase text-xl text-white flex flex-row justify-around my-16">
-          <p> Home</p>
-          <p>About us</p>
-          <p> Contact us</p>
+          <Link to="/">
+            <p> Home</p>
+          </Link>
+          <Link to={"/aboutus"}>
+            <p>About us</p>
+          </Link>
+
+          <Link to={"/aboutus"}>
+            <p>Contact us</p>
+          </Link>
         </div>
         <div className="my-40">
           <img
