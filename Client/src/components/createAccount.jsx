@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import {Link} from "react-router-dom" ;
 import landingImage from "../assets/landing_page_Image.png";
 import googleImage from "../assets/googleImage.png";
-
+import { useNavigate } from "react-router-dom";
 
 
 function CreateAccount() {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -16,7 +17,10 @@ function CreateAccount() {
 
   const onSubmit = (data) => {
     console.log(data);
+    navigate('/dashboard')
+    
   };
+ 
 
   return (
     <div className="w-screen h-screen flex flex-row">
@@ -88,6 +92,7 @@ function CreateAccount() {
               Sign up
             </button>
           </form>
+
           <div className="flex flex-row my-3 items-center">
             <div className="h-[1px] w-8 bg-gray-300"></div>
             <p className="text-transform: uppercase text-gray-300 m-3 text-sm">
@@ -139,3 +144,4 @@ function CreateAccount() {
 }
 
 export default CreateAccount;
+ 
