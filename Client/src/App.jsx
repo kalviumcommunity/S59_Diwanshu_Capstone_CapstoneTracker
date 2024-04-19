@@ -7,6 +7,7 @@ import CreateAccount from './components/createAccount'
 import LandingPage from './components/landingPage'
 import AboutUs from './components/aboutUs';
 import ContactUs from './components/contactUs';
+import Dashboard from './components/dashboard';
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signup" element={<CreateAccount />} />
         <Route path="/aboutus" element={<AboutUs/>}/>
         <Route path="/contactus" element={<ContactUs/>}/>
+        <Route path="/dashboard" element={<Dashboard/>}/>
       </Routes>
     </>
   );
