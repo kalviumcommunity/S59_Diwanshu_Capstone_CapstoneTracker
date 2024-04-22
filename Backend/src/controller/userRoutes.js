@@ -2,15 +2,11 @@ require("dotenv").config();
 
 const express = require("express");
 const router = express.Router()
-<<<<<<< HEAD
-const {UserModel} = require("../Model/userSchema");
-const passport = require("passport");
-=======
-
->>>>>>> main
 const jwt = require("jsonwebtoken");
-const {updateSchema,userJoiSchema} = require("../validation/userJoiSchemas");
+
+const {userJoiSchema} = require("../validation/userJoiSchemas");
 const {validateData} = require("../validation/validator");
+const { UserModel } = require("../Model/userSchema");
 
 
 
@@ -41,68 +37,81 @@ router.post("/register" , async (req,res) => {
 
        await newUser.setPassword(password);
        const savedUser = await newUser.save();
-       res.status.apply(201).json(savedUser);
+       res.status(201).json(savedUser);
     } catch(error) {
-<<<<<<< HEAD
         console.error("Error registering user :" , error) ;
-=======
-        console.error("Error registering user :" error) ;
->>>>>>> main
         res.status(500).json({message : "Internal Server Error"});
    }
 });
 
-<<<<<<< HEAD
-router.post("/login", passport.authenticate("local", {session:false}),
-(req,res) => {
-    const token=jwt.sign({userId : req.user._id},process.env.SECRET_KEY,{
-        expiresIn : "1h",
-    });
-
-    res.json({token}) ;
-
-});
-
-router.put(
-    "/update",
-    passport.authenticate("jwt" ,{session: false}),
-    async (req,res)=> {
-        try {
-            const user = await UserModel.findById(req.user.id) ;
-            if(!user) {
-                return res.status(404).json({message: "User not found"});
-            }
-            const{error,value} = validateData(req.body,updateSchema);
-            if(error) {
-                return res.status(400).json({message : error.details.map((details) => details.message)}) ;
-            }
-            console.log(req.body.password)
-            const isPasswordValid = await user.validatePassword(req.body.password);
-            if (!isPasswordValid) {
-                return res.status(401).json({message : "Invalid password"});
-            }
-            if(req.body.username){
-                user.username = req.body.username;
-            }
-            if(req.body.fullname){
-                user.fullname = req.body.fullname;
-            }
-            if(req.body.newPassword) {
-                await user.setPassword(req.body.newPassword);
-            }
-            await user.save();
-            res.json({message : "User data updated successfully", user});
-        } catch (error) {
-            res.status(500).json({message : error.message});
-        }
-    }
+router.post("/login", 
+  (req,res) => {
+   const token = jwt.sign({userId : req.user._id}, process.env.SECRET_KEY,{
+    expiresIn : "1h",
+   });
+   res.json({token});
+},
 );
 
-module.exports = router ;
-=======
-// router.post("/login", 
-// (req,res) => {
+router.put(
+  "/update",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const user = await UserModel.findById(req.user.id);
 
-// },
-// );
->>>>>>> main
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      const { error, value } = validateData(req.body, updateSchema);
+      if (error) {
+        return res
+          .status(400)
+          .json({ message: error.details.map((detail) => detail.message) });
+      }
+      console.log(req.body.password);
+      const isPasswordValid = await user.validatePassword(req.body.password);
+      if (!isPasswordValid) {
+        return res.status(401).json({ message: "Invalid password" });
+      }
+
+      if (req.body.username) {
+        user.username = req.body.username;
+      }
+      if (req.body.fullname) {
+        user.fullname = req.body.fullname;
+      }
+      if (req.body.newPassword) {
+        await user.setPassword(req.body.newPassword);
+      }
+
+      await user.save();
+
+      res.json({ message: "User data updated successfully", user });
+    } catch (error) {
+      res.status(500).json({ message: error.message });
+    }
+  }
+);
+
+router.post(
+  "/verifySession",
+  passport.authenticate("jwt", { session: false }),
+  async (req, res) => {
+    try {
+      const user = await UserModel.findById(req.user.id).select("-password");
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      res.status(200).json({ user });
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({ error });
+    }
+  }
+);
+
+module.exports = router;
