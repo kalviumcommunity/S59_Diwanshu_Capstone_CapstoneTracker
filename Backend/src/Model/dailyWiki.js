@@ -1,18 +1,28 @@
 const mongoose = require("mongoose");
 
 const dailyStandupSchema = new mongoose.Schema(
-    {
-        date: {
-            type:Date,
-            required : true,
-        },
-        worklist : {
-            type : String,
-            required : true,
-
-        },
+  {
+    date: {
+      type: Date,
+      defualt: Date.now(),
+      required: true,
     },
-    {versionKey : false}
+    worklist: {
+      type: String,
+      required: true,
+    },
+    userId: {
+      type: mongoose.SchemaTypes.ObjectId,
+      ref: "User",
+    },
+
+    status: {
+      type: String,
+      enum: ["To Do", "In Progress", "Done"],
+      default: "To Do",
+    },
+  },
+  { versionKey: false }
 );
 
 const standUp = mongoose.model ("Wiki", dailyStandupSchema) ;

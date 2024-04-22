@@ -15,6 +15,20 @@ const userJoiSchema = Joi.object({
 
 });
 
+const contactSchema = Joi.object({
+    email: Joi.string().email().required(),
+    fullname : Joi.string().required(),
+    message : Joi.string().required()
+})
+
+const updateHomework = Joi.object({
+    artifactLink : Joi.string().uri().required(),
+    videoLink : Joi.string().uri().required(),
+    codiumAI : Joi.string().required(),
+    actionTakenonFeedback : Joi.string().required()
+})
+
 module.exports = {
-    updateSchema,userJoiSchema
+    updateSchema,userJoiSchema,contactSchema,updateHomework
 }
+

@@ -5,6 +5,7 @@ const contactSchema = new mongoose.Schema (
         email : {
             type : String,
             required : true,
+            lowercase: true,
 
         },
         fullname : {
@@ -19,5 +20,5 @@ const contactSchema = new mongoose.Schema (
     {versionKey: false}
 );
 
-const Contact = mongoose.model("contact", contactSchema);
+const Contact = mongoose.model("Contact", contactSchema);
 module.exports = {Contact} ;

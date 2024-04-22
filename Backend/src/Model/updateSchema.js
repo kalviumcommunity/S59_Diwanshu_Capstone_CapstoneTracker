@@ -12,6 +12,10 @@ const updateSchema = new mongoose.Schema(
       },
       codiumAI : {
          type: String,   
+      },
+      actionTakenonFeedback : {
+         type:String,
+         required:true,
       }
 
    },
