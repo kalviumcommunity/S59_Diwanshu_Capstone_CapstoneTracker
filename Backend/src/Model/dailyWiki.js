@@ -4,7 +4,7 @@ const dailyStandupSchema = new mongoose.Schema(
   {
     date: {
       type: Date,
-      defualt: Date.now,
+      defualt: Date.now(),
       required: true,
     },
     worklist: {

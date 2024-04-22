@@ -14,7 +14,7 @@ const updateSchema = new mongoose.Schema(
          type: String,   
       },
       actionTakenonFeedback : {
-         type:string,
+         type:String,
          required:true,
       }
 
