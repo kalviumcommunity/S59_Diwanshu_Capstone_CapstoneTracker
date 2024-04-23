@@ -9,17 +9,22 @@ const UserSchema = new mongoose.Schema({
   },
   fullname: {
     type: String,
-    require: true,
+    required: true,
   },
   email: {
     type: String,
     required: true,
     unique: true,
-    lowercase: true
+    lowercase: true,
   },
   password: {
     type: String,
     require: true,
+  },
+  streak: {
+    type: Number,
+    required: true,
+    default: 0,
   },
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
   discussion: [{ type: Schema.Types.ObjectId, ref: "Discussion" }],

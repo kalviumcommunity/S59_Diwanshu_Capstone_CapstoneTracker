@@ -3,8 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router();
 
-const {Streak} = require("../Model/progress");
-
+const { UserModel } = require("../Model/userSchema");
 const {updateHomework} = require("../validation/userJoiSchemas");
 const {contactSchema} = require("../validation/userJoiSchemas");
 const {updateCapstone} = require("../Model/updateSchema");

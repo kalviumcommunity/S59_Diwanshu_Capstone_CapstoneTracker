@@ -55,7 +55,7 @@ function CreateAccount() {
                 placeholder="********"
                 {...register("password", {
                   required: "please enter the password",
-                  minlength: {
+                  minLength: {
                     value: 8,
                     message: "The password should be at least 8 character long",
                   },
