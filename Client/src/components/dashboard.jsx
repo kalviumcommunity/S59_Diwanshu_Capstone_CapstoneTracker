@@ -4,8 +4,14 @@ import verify from "../assets/verify.png" ;
 import homeButton from "../assets/homeButton.png";
 import upArrow from "../assets/upArrow.png" ;
 import discussion from "../assets/feedback.png";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard(){
+  const navigate = useNavigate();
+   const handleClick =()=>{
+    navigate('/Assignment')
+   }
+
     return (
       <div className="w-screen h-screen bg-gray-100 flex flex-row">
         <div className="h-screen w-2/12 bg-white">
@@ -16,14 +22,19 @@ function Dashboard(){
             <img src={homeButton} alt="homeButton" className="h-6 w-5 m-8" />
             <p>Dashboard</p>
           </div>
-          <div className="flex flex-row items-center h-12">
-            <img src={upArrow} alt="upArrow" className="h-6 w-5 m-8" />
-            <p>Upload</p>
-          </div>
+
+         
+            <div className="flex flex-row items-center h-12" onClick={handleClick}>
+              <img src={upArrow} alt="upArrow" className="h-6 w-5 m-8" />
+              <p>Upload</p>
+            </div>
+         
+
           <div className="w-11/12 h-12 bg-gray-100 flex flex-row items-center">
             <img src={verify} alt="verify" className="h-6 w-5 m-8" />
             <p>Progress</p>
           </div>
+
           <div className="flex flex-row items-center h-12">
             <img src={discussion} alt="discussion" className="h-6 w-5 m-8" />
             <p>Discussion</p>
