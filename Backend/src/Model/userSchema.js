@@ -21,6 +21,11 @@ const UserSchema = new mongoose.Schema({
     type: String,
     require: true,
   },
+
+  oauthProvider: { type: String },
+
+  oauthId: { type: String },
+  
   streak: {
     type: Number,
     required: true,
@@ -30,7 +35,6 @@ const UserSchema = new mongoose.Schema({
   discussion: [{ type: Schema.Types.ObjectId, ref: "Discussion" }],
   wiki: [{ type: Schema.Types.ObjectId, ref: "Wiki" }],
   update: [{ type: Schema.Types.ObjectId, ref: "homeworkName" }],
-  progress: [{ type: Schema.Types.ObjectId, ref: "Progress" }],
 });
 
           UserSchema.index({ username : 1 , email: 1});

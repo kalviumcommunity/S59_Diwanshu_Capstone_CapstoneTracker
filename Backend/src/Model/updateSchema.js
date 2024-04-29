@@ -2,6 +2,11 @@ const mongoose = require("mongoose")
 
 const updateSchema = new mongoose.Schema(
    {
+      postedBy :{
+         userId : {type: Schema.Types.ObjectId, ref: "User", required: true},
+         username : {type : String , required : true},
+
+      },
       artifactLink : {
          type:String,
          required: true

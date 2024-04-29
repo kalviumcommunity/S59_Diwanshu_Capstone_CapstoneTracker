@@ -1,10 +1,17 @@
-const express = require("express");
- const app = express();
+require("dotenv").config();
+require("./src/auth/localStrategy") ;
+require("./src/auth/JwtStrategy");
 
+
+const express = require("express");
+const http = require("http") ;
+const cors = require("cors");
+ const app = express();
 const mongoose = require("mongoose");
-const cors = require("cors")
 const PORT = process.env.PORT || 8080;
-const {router} = require("./src/controller/userRoutes");
+const userRouter = require("./src/controller/userRoutes");
+const viewRouter = require("./src/controller/route");
+
 const { connectDB } = require("./src/connection/db");
 
 connectDB();
@@ -16,7 +23,8 @@ connectDB();
  })
 );
  app.use(express.json())
- app.use("/user",router)
+ app.use("/user",userRouter)
+ app.use("/view", viewRouter) 
 
 
 

@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const router = express.Router()
 const jwt = require("jsonwebtoken");
+const passport = require("passport");
 
 const {userJoiSchema} = require("../validation/userJoiSchemas");
 const {validateData} = require("../validation/validator");
@@ -45,11 +46,20 @@ router.post("/register" , async (req,res) => {
 });
 
 router.post("/login", 
-  (req,res) => {
+passport.authenticate("local", {session: false}),
+  async (req,res) => {
    const token = jwt.sign({userId : req.user._id}, process.env.SECRET_KEY,{
     expiresIn : "1h",
    });
-   res.json({token});
+
+   const user = await UserModel.findById(req.user._id);
+   if(!user) {
+    return res.status.apply(404).json({message : "User not found"});
+   }
+   const userData = user._doc ;
+   delete userData.password ;
+  
+   res.status(200).json({user : userData,token});
 },
 );
 

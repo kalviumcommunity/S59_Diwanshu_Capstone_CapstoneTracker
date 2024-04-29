@@ -2,6 +2,7 @@ require("dotenv").config();
 
 const express = require("express");
 const router = express.Router();
+const passport = require("passport") ;
 
 const { UserModel } = require("../Model/userSchema");
 const {updateHomework} = require("../validation/userJoiSchemas");
@@ -9,7 +10,9 @@ const {contactSchema} = require("../validation/userJoiSchemas");
 const {updateCapstone} = require("../Model/updateSchema");
 const {validateData} = require("../validation/validator");
 
-router.post("/contact" , async (req,res)=> {
+router.post("/contact" ,
+passport.authenticate("jwt", {session : false}),
+ async (req,res)=> {
     try{
         const {email,fullname,message}= req.body;
         const {error} = validateData(
@@ -28,10 +31,18 @@ router.post("/contact" , async (req,res)=> {
     }
 })
 
-router.post("/updateCapstone" ,async(req,res) => {
+router.post("/updateCapstone" ,
+passport.authenticate("jwt", {session : false}),
+async(req,res) => {
+
     try{
+        const user = await UserModel.findById(req.user.id);
+        if(!user){
+          return res.status(404).json({message : "User not found"});
+        }
         const { artifactLink, videoLink, codiumAI, actionTakenonFeedback } =
           req.body;
+
         const { error } = validateData(
           { artifactLink, videoLink, codiumAI, actionTakenonFeedback },
           updateHomework
@@ -39,27 +50,35 @@ router.post("/updateCapstone" ,async(req,res) => {
 
         if(error){
             console.log(error);
-            return res.status(400).json({message : error.details});
+            return res.status(422).json({message : error.details});
         }
 
         const newHomeworkUpdate = new updateCapstone({
+          postedBy : {userId : user._id, username : user.username},
           artifactLink,
           videoLink,
           codiumAI,
           actionTakenonFeedback,
         });
         
-        await newHomeworkUpdate.save();
-        res.status(200).json({message : "Homework Updated Successfully."})
+        const savedHomework = await newHomeworkUpdate.save();
+
+        user.update.push(savedHomework._id);
+         await user.save()
+
+        res.status(201).json({message : "Homework Updated Successfully."})
+
 
     }
     catch(error){
         console.error(error);
         res.status(500).json({message : "Internal Server Error"});
     }
-})
+});
 
-router.get("/progress" , async (req,res)=> {
+router.get("/progress" ,
+passport.authenticate("jwt", {session : false}),
+ async (req,res)=> {
     try{
       const streakData = await Streak.find();
         
@@ -71,4 +90,4 @@ router.get("/progress" , async (req,res)=> {
     }
 })
 
- 
+ module.exports = router ;
