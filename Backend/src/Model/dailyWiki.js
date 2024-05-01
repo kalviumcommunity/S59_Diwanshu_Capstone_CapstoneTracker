@@ -25,6 +25,6 @@ const dailyStandupSchema = new mongoose.Schema(
   { versionKey: false }
 );
 
-const standUp = mongoose.model ("Wiki", dailyStandupSchema) ;
+const standUp = mongoose.model("Wiki", dailyStandupSchema);
 
-module.exports = {standUp}
+module.exports = { standUp };
