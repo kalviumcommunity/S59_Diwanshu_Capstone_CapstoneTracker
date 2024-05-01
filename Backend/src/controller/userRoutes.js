@@ -12,6 +12,7 @@ const { UserModel } = require("../Model/userSchema");
 
 
 
+
 router.post("/register" , async (req,res) => {
     try{
         const {username,fullname,email,password} = req.body ;
@@ -45,9 +46,11 @@ router.post("/register" , async (req,res) => {
    }
 });
 
+
+
 router.post("/login", 
 passport.authenticate("local", {session: false}),
-  async (req,res) => {
+  async(req,res) => {
    const token = jwt.sign({userId : req.user._id}, process.env.SECRET_KEY,{
     expiresIn : "1h",
    });

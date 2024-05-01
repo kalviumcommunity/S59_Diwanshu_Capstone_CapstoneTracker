@@ -12,7 +12,7 @@ const userJoiSchema = Joi.object({
   fullname: Joi.string().required(),
   email: Joi.string().email().required(),
   password: Joi.string().min(6).required(),
-  streak: Joi.number().integer().min(0).required(),
+  streak: Joi.number().integer().min(0).optional()
 });
 
 const contactSchema = Joi.object({
