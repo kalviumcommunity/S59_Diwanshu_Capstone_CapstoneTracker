@@ -2,17 +2,24 @@ import logo from "../assets/logo.png"
 import logout from "../assets/logout.png" ;
 import verify from "../assets/verify.png" ;
 import homeButton from "../assets/homeButton.png";
+import Wiki from "../Pages/Wiki" ;
 import upArrow from "../assets/upArrow.png" ;
 import discussion from "../assets/feedback.png";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard(){
+   const [showWiki, setShowWiki] = useState(false);
+
   const navigate = useNavigate();
    const handleClick =()=>{
     navigate('/Assignment')
    }
    const handleProgressclick = () => {
     navigate('/progress') 
+   }
+   const handleButtonClick = ()=> {
+        setShowWiki(true);
    }
 
     return (
@@ -26,14 +33,18 @@ function Dashboard(){
             <p>Dashboard</p>
           </div>
 
-         
-            <div className="flex flex-row items-center h-12" onClick={handleClick}>
-              <img src={upArrow} alt="upArrow" className="h-6 w-5 m-8" />
-              <p>Upload</p>
-            </div>
-         
+          <div
+            className="flex flex-row items-center h-12"
+            onClick={handleClick}
+          >
+            <img src={upArrow} alt="upArrow" className="h-6 w-5 m-8" />
+            <p>Upload</p>
+          </div>
 
-          <div className="w-11/12 h-12 bg-gray-100 flex flex-row items-center" onClick ={handleProgressclick}>
+          <div
+            className="w-11/12 h-12 bg-gray-100 flex flex-row items-center"
+            onClick={handleProgressclick}
+          >
             <img src={verify} alt="verify" className="h-6 w-5 m-8" />
             <p>Progress</p>
           </div>
@@ -49,6 +60,10 @@ function Dashboard(){
         </div>
         <div className="mx-12 my-12">
           <p className="text-purple-400 text-4xl"> Welcome back , Sujal </p>
+          <div>
+            <button onClick={handleButtonClick}> Edit </button>
+            {showWiki && <Wiki />}
+          </div>
         </div>
       </div>
     );
