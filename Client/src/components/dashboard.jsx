@@ -11,6 +11,9 @@ function Dashboard(){
    const handleClick =()=>{
     navigate('/Assignment')
    }
+   const handleProgressclick = () => {
+    navigate('/progress') 
+   }
 
     return (
       <div className="w-screen h-screen bg-gray-100 flex flex-row">
@@ -30,7 +33,7 @@ function Dashboard(){
             </div>
          
 
-          <div className="w-11/12 h-12 bg-gray-100 flex flex-row items-center">
+          <div className="w-11/12 h-12 bg-gray-100 flex flex-row items-center" onClick ={handleProgressclick}>
             <img src={verify} alt="verify" className="h-6 w-5 m-8" />
             <p>Progress</p>
           </div>
