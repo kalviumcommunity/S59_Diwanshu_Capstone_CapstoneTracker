@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const argon2 = require("argon2");
 
+
+const { Schema } = mongoose; 
+
+
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -19,16 +23,13 @@ const UserSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    require: true,
+    required: true, 
   },
-
-  oauthProvider: { type: String },
-
+ 
   oauthId: { type: String },
 
   streak: {
     type: Number,
-    required: true,
     default: 0,
   },
   friends: [{ type: Schema.Types.ObjectId, ref: "User" }],
@@ -39,7 +40,9 @@ const UserSchema = new mongoose.Schema({
 
 UserSchema.index({ username: 1, email: 1 });
 
-UserSchema.methods.setpassword = async function (password) {
+
+UserSchema.methods.setPassword = async function (password) {
+  
   try {
     this.password = await argon2.hash(password);
     console.log(this);
@@ -56,6 +59,7 @@ UserSchema.methods.validatePassword = async function (password) {
   }
 };
 
-const UserModel = new mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("User", UserSchema);
+
 
 module.exports = { UserModel };

@@ -4,9 +4,15 @@ require("./src/auth/JwtStrategy");
 
 
 const express = require("express");
-const http = require("http") ;
+const http = require("http");
+const passport = require("./src/auth")
+
 const cors = require("cors");
  const app = express();
+
+ app.use(passport.initialize());
+ app.use(passport.session());
+
 const mongoose = require("mongoose");
 const PORT = process.env.PORT || 8080;
 const userRouter = require("./src/controller/userRoutes");
@@ -27,7 +33,17 @@ connectDB();
  app.use("/view", viewRouter) 
 
 
-
+app.get(
+  "/auth/google",
+  passport.authenticate("google", { scope: ["profile", "email"] })
+); 
+app.get(
+  "/auth/google/callback",
+  passport.authenticate("google", {
+    successRedirect: "/", 
+    failureRedirect: "/login", 
+  })
+);
 
 
 mongoose.connection.once("open",()=> {
