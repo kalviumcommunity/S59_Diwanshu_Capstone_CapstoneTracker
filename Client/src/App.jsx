@@ -8,6 +8,7 @@ import LandingPage from './components/landingPage'
 import AboutUs from './components/aboutUs';
 import ContactUs from './components/contactUs';
 import Dashboard from './components/dashboard';
+import Progress from './components/progress' ;
 import AssignmentForm from '../src/Pages/Asssignmentform'
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/contactus" element={<ContactUs/>}/>
         <Route path="/dashboard" element={<Dashboard/>}/>
         <Route path="/Assignment" element={<AssignmentForm/>}/>
+        <Route path="/progress" element={<Progress/>} /> 
 
       </Routes>
     </>
