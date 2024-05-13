@@ -9,7 +9,7 @@ const dailyStandupSchema = new mongoose.Schema(
     },
     worklist: {
       type: String,
-      required: true,
+      required: true
     },
     userId: {
       type: mongoose.SchemaTypes.ObjectId,

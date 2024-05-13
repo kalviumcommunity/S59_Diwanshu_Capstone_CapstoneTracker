@@ -1,72 +1,54 @@
-import logo from "../assets/logo.png"
-import logout from "../assets/logout.png" ;
-import verify from "../assets/verify.png" ;
-import homeButton from "../assets/homeButton.png";
-import Wiki from "../Pages/Wiki" ;
-import upArrow from "../assets/upArrow.png" ;
-import discussion from "../assets/feedback.png";
+
+import Wiki from "../Pages/Wiki";
+
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "./Sidebar";
+function Dashboard() {
+  const [showWiki, setShowWiki] = useState(false);
+  const [task, setTask] = useState("");
+  const [tasks, setTasks] = useState([]);
+  console.log(tasks);
 
-function Dashboard(){
-   const [showWiki, setShowWiki] = useState(false);
+  function addtask() {
+    setTasks((prev) => [...prev, task]);
+    setTask("");
+  }
 
-  const navigate = useNavigate();
-   const handleClick =()=>{
-    navigate('/Assignment')
-   }
-   const handleProgressclick = () => {
-    navigate('/progress') 
-   }
-   const handleButtonClick = ()=> {
-        setShowWiki(true);
-   }
+  const handleButtonClick = () => {
+    setShowWiki(true);
+  };
 
-    return (
-      <div className="w-screen h-screen bg-gray-100 flex flex-row">
-        <div className="h-screen w-2/12 bg-white">
-          <div className="w-full h-40">
-            <img src={logo} alt="logo" className="h-99 w-99 md:w-36 mb-12" />
-          </div>
-          <div className="w-11/12 h-12 bg-gray-100 flex  flex-row items-center">
-            <img src={homeButton} alt="homeButton" className="h-6 w-5 m-8" />
-            <p>Dashboard</p>
-          </div>
-
-          <div
-            className="flex flex-row items-center h-12"
-            onClick={handleClick}
+  return (
+    <div className="w-screen h-screen bg-gray-100 flex flex-row">
+      <Sidebar />
+      <div className="mx-12 my-12">
+        <p className="text-purple-400 text-4xl"> Welcome back , Sujal </p>
+        <div>
+          {/* <button onClick={handleButtonClick}> Edit </button> */}
+          {/* {showWiki && <Wiki />} */}
+          <input
+            type="text"
+            value={task}
+            onChange={(e) => setTask(e.target.value)}
+            className="px-4 py-2 border-purple-400"
+          />
+          <button
+            className="px-4 py-2 bg-blue-400 text-white"
+            onClick={addtask}
           >
-            <img src={upArrow} alt="upArrow" className="h-6 w-5 m-8" />
-            <p>Upload</p>
-          </div>
-
-          <div
-            className="w-11/12 h-12 bg-gray-100 flex flex-row items-center"
-            onClick={handleProgressclick}
-          >
-            <img src={verify} alt="verify" className="h-6 w-5 m-8" />
-            <p>Progress</p>
-          </div>
-
-          <div className="flex flex-row items-center h-12">
-            <img src={discussion} alt="discussion" className="h-6 w-5 m-8" />
-            <p>Discussion</p>
-          </div>
-          <div className="w-11/12 h-12 bg-gray-100 flex flex-row items-center fixed bottom-1">
-            <img src={logout} alt="logout" className="h-6 w-5 m-8" />
-            <p>Logout</p>
-          </div>
+            Add Task
+          </button>
         </div>
-        <div className="mx-12 my-12">
-          <p className="text-purple-400 text-4xl"> Welcome back , Sujal </p>
-          <div>
-            <button onClick={handleButtonClick}> Edit </button>
-            {showWiki && <Wiki />}
-          </div>
-        </div>
+        {tasks.map((item) => (
+          <p className="bg-purple-400 my-2 text-white px-4 py-2 rounded-lg">
+            <input type="checkbox" name="" id="" />
+            {item}
+          </p>
+        ))}
       </div>
-    );
+    </div>
+  );
 }
 
-export default Dashboard ;
+export default Dashboard;
