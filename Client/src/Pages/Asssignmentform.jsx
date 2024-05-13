@@ -1,20 +1,22 @@
-import {useForm} from "react-hook-form" ;
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import Sidebar from "../components/Sidebar";
+function AssignmentForm() {
+  const navigate = useNavigate();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-function AssignmentForm(){
-    const navigate = useNavigate();
-    const {
-        register,
-        handleSubmit,
-        formState : {errors},
-    } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    navigate("/dashboard");
+  };
 
-    const onSubmit = (data) => {
-        console.log(data) ;
-        navigate('/dashboard')
-    };
-
-    return (
+  return (
+    <div className="flex">
+      <Sidebar />
       <div className="w-3/6 bg-purple-500 h-screen">
         <div className="mx-8">
           <div className="text-white text-3xl">
@@ -96,6 +98,7 @@ function AssignmentForm(){
           </div>
         </div>
       </div>
-    );
+    </div>
+  );
 }
-export default AssignmentForm ;
+export default AssignmentForm;
