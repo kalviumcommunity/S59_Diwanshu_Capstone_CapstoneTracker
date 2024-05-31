@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
+const { Schema } = mongoose;
 
-const updateSchema = new mongoose.Schema(
+const updateSchema = new Schema(
   {
     postedBy: {
       userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
@@ -16,8 +17,9 @@ const updateSchema = new mongoose.Schema(
     },
     codiumAI: {
       type: String,
+      default: "", 
     },
-    actionTakenonFeedback: {
+    actionTakenOnFeedback: {
       type: String,
       required: true,
     },
